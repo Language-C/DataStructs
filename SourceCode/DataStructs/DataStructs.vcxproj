@@ -25,6 +25,7 @@
     <ClInclude Include="Sources\BasicTypes\Int.h" />
     <ClInclude Include="Sources\Vector\Vector.h" />
     <ClInclude Include="Sources\Vector\VectorConfigure.h" />
+    <ClInclude Include="Sources\Vector\VectorStruct.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\BasicTypes\Impls\Int.c" />

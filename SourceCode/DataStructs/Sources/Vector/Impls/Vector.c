@@ -3,45 +3,34 @@
 #include <memory.h>
 
 C_API Vector* VectorCreate() {
-    Vector *this = (Vector*)VectorGetMemMallocFunc()(sizeof(Vector));
-    if (!this) {
+    Vector *self = (Vector*)VectorGetMemMallocFunc()(sizeof(Vector));
+    if (!self) {
         return Null;
     }
 
-    this->DataPtr = (VectorNode*)VectorGetMemMallocFunc()(sizeof(VectorNode) * VectorGetInitializationCapacity());
-    this->Size = 0;
-    this->Capacity = VectorGetInitializationCapacity();
-    memset(this->DataPtr, 0, this->Capacity * sizeof(VectorNode));
-    return this;
+    self->DataPtr = (VectorNode*)VectorGetMemMallocFunc()(sizeof(VectorNode) * VectorGetInitializationCapacity());
+    self->Size = 0;
+    self->Capacity = VectorGetInitializationCapacity();
+    memset(self->DataPtr, 0, self->Capacity * sizeof(VectorNode));
+    return self;
 }
 
-C_API void VectorDestroy(Vector** this)
-{
-    VectorGetMemFreeFunc()((*this)->DataPtr);
-    VectorGetMemFreeFunc()((*this));
-    *this = Null;
+C_API void VectorDestroy(Vector** selfPtr) {
+    VectorGetMemFreeFunc()((*selfPtr)->DataPtr);
+    VectorGetMemFreeFunc()((*selfPtr));
+    *selfPtr = Null;
 }
 
-C_API void VectorDestroyWithFreeElements(Vector** vector) {
-    Vector* this = (*vector);
-    for (VectorNode* node = this->DataPtr; node < &(this->DataPtr[this->Size]); ++node) {
-        if (node->Data){
-            VectorGetMemFreeFunc()(node->Data);
-        }
-    }
-    VectorDestroy(vector);
+C_API UInt VectorLen(Vector *self) {
+    return self->Size;
 }
 
-C_API unsigned int VectorLen(Vector *this) {
-    return this->Size;
+C_API UInt VectorCapacity(Vector *self) {
+    return self->Capacity;
 }
 
-C_API unsigned int VectorCapacity(Vector *this) {
-    return this->Capacity;
-}
-
-C_API Bool VectorReSetCapacity(Vector *this, unsigned int newCapacity) {
-    if (newCapacity <= this->Capacity) {
+C_API Bool VectorReSetCapacity(Vector *self, UInt newCapacity) {
+    if (newCapacity <= self->Capacity) {
         return False;
     }
 
@@ -49,48 +38,41 @@ C_API Bool VectorReSetCapacity(Vector *this, unsigned int newCapacity) {
     if (ptr == Null) {
         return False;
     }
-    memcpy_s(ptr, newCapacity * sizeof(VectorNode), this->DataPtr, this->Size * sizeof(VectorNode));
-    memset(&ptr[this->Size], 0, (newCapacity - this->Size) * sizeof(VectorNode));
+    memcpy_s(ptr, newCapacity * sizeof(VectorNode), self->DataPtr, self->Size * sizeof(VectorNode));
+    memset(&ptr[self->Size], 0, (newCapacity - self->Size) * sizeof(VectorNode));
 
-    VectorGetMemFreeFunc()(this->DataPtr);
+    VectorGetMemFreeFunc()(self->DataPtr);
 
-    this->DataPtr = ptr;
-    this->Capacity = newCapacity;
+    self->DataPtr = ptr;
+    self->Capacity = newCapacity;
     return True;
 }
 
-C_API Bool VectorAdd(Vector *this, void* data)
-{
-    if (this->Size == this->Capacity)
-    {
-        VectorReSetCapacity(this, (UInt)(VectorGetMemoryGrowthRate() * this->Capacity + 0.5f));
+C_API Bool VectorAdd(Vector *self, void* data) {
+    if (self->Size == self->Capacity) {
+        VectorReSetCapacity(self, (UInt)(VectorGetMemoryGrowthRate() * self->Capacity + 0.5f));
     }
 
-    (this->DataPtr)[this->Size].Data = data;
-    ++this->Size;
+    (self->DataPtr)[self->Size].Data = data;
+    ++self->Size;
     return True;
 }
 
-C_API Bool VectorAddArray(Vector *this, void** data, unsigned int size)
-{
+C_API Bool VectorAddArray(Vector *self, void** data, UInt size) {
     char** ptr = (char**)data;
-    for (unsigned int i = 0; i < size; ++i)
-    {
-        VectorAdd(this, ptr[i]);
+    for (UInt i = 0; i < size; ++i) {
+        VectorAdd(self, ptr[i]);
     }
     return True;
 }
 
-C_API NullUInt VectorGetIdxOfFirst(Vector *this, void* data)
-{
+C_API NullUInt VectorGetIdxOfFirst(Vector *self, void* data) {
     NullUInt result = NullUIntCreateInvalid();
-    VectorNode * node = this->DataPtr;
+    VectorNode * node = self->DataPtr;
 
-    while (node < &(this->DataPtr[this->Size]))
-    {
-        if (node->Data == data)
-        {
-            result.Value = (UInt)((node - this->DataPtr) / sizeof(VectorNode));
+    while (node < &(self->DataPtr[self->Size])) {
+        if (node->Data == data) {
+            result.Value = (UInt)((node - self->DataPtr) / sizeof(VectorNode));
             result.Valid = True;
             break;
         }
@@ -99,83 +81,70 @@ C_API NullUInt VectorGetIdxOfFirst(Vector *this, void* data)
     return result;
 }
 
-C_API Bool  VectorUpdateByIdx(Vector *this, unsigned int idx, void* data)
-{
-    if (idx + 1 > this->Size)
-    {
+C_API Bool  VectorUpdateByIdx(Vector *self, UInt idx, void* data) {
+    if (idx + 1 > self->Size) {
         return False;
     }
-    this->DataPtr[idx].Data = data;
+    self->DataPtr[idx].Data = data;
     return True;
 }
 
-C_API void* VectorGetByIdx(Vector *this, unsigned int idx)
-{
-    if (idx + 1 > this->Size)
-    {
+C_API void* VectorGetByIdx(Vector *self, UInt idx) {
+    if (idx + 1 > self->Size) {
         return Null;
     }
-    return this->DataPtr[idx].Data;
+    return self->DataPtr[idx].Data;
 }
 
-C_API void* VectorRemoveByIdx(Vector *this, unsigned int idx)
-{
-    if (idx + 1 > this->Size)
-    {
+C_API void* VectorRemoveByIdx(Vector *self, UInt idx) {
+    if (idx + 1 > self->Size) {
         return Null;
     }
-    void* tmp = this->DataPtr[idx].Data;
-    this->DataPtr[idx].Data = this->DataPtr[--this->Size].Data;
+    void* tmp = self->DataPtr[idx].Data;
+    self->DataPtr[idx].Data = self->DataPtr[--self->Size].Data;
     return tmp;
 }
 
-C_API Bool VectorRemoveAndFreeByIdx(Vector *this, unsigned int idx)
-{
-    if (idx + 1 > this->Size)
-    {
+C_API Bool VectorRemoveAndFreeByIdx(Vector *self, UInt idx) {
+    if (idx + 1 > self->Size) {
         return False;
     }
-    void* tmp = this->DataPtr[idx].Data;
-    this->DataPtr[idx].Data = this->DataPtr[--this->Size].Data;
+    void* tmp = self->DataPtr[idx].Data;
+    self->DataPtr[idx].Data = self->DataPtr[--self->Size].Data;
 
     VectorGetMemFreeFunc()(tmp);
     return True;
 }
 
-C_API void VectorEachWithNoParam(Vector *this, VectorNoParamCallback callback)
-{
-    VectorNode * node = this->DataPtr;
-    while (node < &(this->DataPtr[this->Size]))
-    {
+C_API void VectorEachWithNoParam(Vector *self, VectorNoParamCallback callback) {
+    VectorNode * node = self->DataPtr;
+    while (node < &(self->DataPtr[self->Size])) {
         callback(node->Data);
         ++node;
     }
 }
 
-C_API void  VectorEachWithOneParam(Vector *this, VectorOneParamCallback callback, void* extraData)
-{
-    VectorNode * node = this->DataPtr;
-    while (node < &(this->DataPtr[this->Size]))
-    {
-        callback(node->Data, extraData);
+C_API void  VectorEachWithOneParam(Vector *self, VectorOneParamCallback callback, void* param) {
+    VectorNode * node = self->DataPtr;
+    while (node < &(self->DataPtr[self->Size])) {
+        callback(node->Data, param);
         ++node;
     }
 }
 
-C_API void  VectorEachWithTwoParams(Vector *this, VectorTwoParamsCallback callback, void* param1, void* param2)
-{
-    VectorNode * node = this->DataPtr;
-    while (node < &(this->DataPtr[this->Size]))
-    {
+C_API void  VectorEachWithTwoParams(Vector *self,
+    VectorTwoParamsCallback callback, void* param1, void* param2) {
+    VectorNode * node = self->DataPtr;
+    while (node < &(self->DataPtr[self->Size])) {
         callback(node->Data, param1, param2);
         ++node;
     }
 }
 
-C_API void  VectorEachWithThreeParams(Vector *this, VectorThreeParamsCallback callback, void* param1, void* param2, void* param3)
-{
-    VectorNode * node = this->DataPtr;
-    while (node < &(this->DataPtr[this->Size]))
+C_API void VectorEachWithThreeParams(Vector *self,
+    VectorThreeParamsCallback callback, void* param1, void* param2, void* param3) {
+    VectorNode * node = self->DataPtr;
+    while (node < &(self->DataPtr[self->Size]))
     {
         callback(node->Data, param1, param2, param3);
         ++node;

@@ -18,10 +18,10 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\VectorTest.cpp">
+    <ClCompile Include="Sources\BasicTypes\IntTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\BasicTypes\IntTest.cpp">
+    <ClCompile Include="Sources\Vector\VectorTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

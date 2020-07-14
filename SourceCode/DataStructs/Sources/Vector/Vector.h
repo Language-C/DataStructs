@@ -1,43 +1,40 @@
 #pragma once
 
 #include "VectorConfigure.h"
-
-typedef struct VectorNode
-{
-    void *Data;
-} VectorNode;
-
-typedef struct Vector
-{
-    VectorNode *DataPtr;
-    unsigned int Size;
-    unsigned int Capacity;
-} Vector;
+#include "VectorStruct.h"
 
 C_API Vector* VectorCreate();
 
-C_API void    VectorDestroy(Vector**);
-C_API void    VectorDestroyWithFreeElements(Vector**);
+C_API void VectorDestroy(Vector** selfPtr);
+C_API void VectorDestroyWithFreeElements(Vector** selfPtr);
 
-C_API unsigned int VectorLen(Vector *vector);
-C_API unsigned int VectorCapacity(Vector *vector);
-C_API Bool         VectorReSetCapacity(Vector *vector, unsigned int newSize);
+C_API UInt VectorLen(Vector* self);
 
-C_API void*    VectorGetByIdx(Vector *vector, unsigned int idx);
-C_API NullUInt VectorGetIdxOfFirst(Vector *vector, void* data);
+C_API UInt VectorCapacity(Vector* self);
+C_API Bool VectorReSetCapacity(Vector* self, UInt newCapacity);
 
-C_API Bool  VectorAdd(Vector *vector, void* data);
-C_API Bool  VectorAddArray(Vector *vector, void** data, unsigned int size);
+C_API void*    VectorGetByIdx(Vector* self, UInt idx);
+C_API NullUInt VectorGetIdxOfFirst(Vector* self, void* data);
 
-C_API Bool  VectorUpdateByIdx(Vector *vector, unsigned int idx, void* data);
+C_API Bool  VectorAdd(Vector* self, void* data);
+C_API Bool  VectorAddArray(Vector* self, void** data, UInt size);
 
-C_API void* VectorRemoveByIdx(Vector *vector, unsigned int idx);
-C_API Bool  VectorRemoveAndFreeByIdx(Vector *vector, unsigned int idx);
+C_API Bool  VectorUpdateByIdx(Vector* self, UInt idx, void* data);
 
-C_API void VectorEachWithNoParam(Vector *vector, VectorNoParamCallback callback);
-C_API void VectorEachWithOneParam(Vector *vector, VectorOneParamCallback callback, void* param);
-C_API void VectorEachWithTwoParams(Vector *vector, VectorTwoParamsCallback callback, void* param1, void* param2);
-C_API void VectorEachWithThreeParams(Vector *vector, VectorThreeParamsCallback callback, void* param1, void* param2, void* param3);
+C_API void* VectorRemoveByIdx(Vector* self, UInt idx);
+C_API Bool  VectorRemoveAndFreeByIdx(Vector*, UInt idx);
+
+C_API void VectorEachWithNoParam(Vector* self,
+    VectorNoParamCallback callback);
+
+C_API void VectorEachWithOneParam(Vector* self,
+    VectorOneParamCallback callback, void* param);
+
+C_API void VectorEachWithTwoParams(Vector* self,
+    VectorTwoParamsCallback callback, void* param1, void* param2);
+
+C_API void VectorEachWithThreeParams(Vector* self,
+    VectorThreeParamsCallback callback, void* param1, void* param2, void* param3);
 
 #define VectorEach VectorEachWithNoParam
 #define VectorEachWithParam VectorEachWithOneParam
