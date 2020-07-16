@@ -1,9 +1,9 @@
 #pragma once
 
-#include "VectorConfigure.h"
 #include "VectorStruct.h"
 
 C_API Vector* VectorCreate();
+C_API Vector* VectorCreateWithCapacity(UInt capacity);
 
 C_API void VectorDestroy(Vector** selfPtr);
 C_API void VectorDestroyWithFreeElements(Vector** selfPtr);
@@ -12,6 +12,9 @@ C_API UInt VectorLen(Vector* self);
 
 C_API UInt VectorCapacity(Vector* self);
 C_API Bool VectorReSetCapacity(Vector* self, UInt newCapacity);
+
+C_API void VectorClear(Vector* self);
+C_API Bool VectorIsEmpty(Vector* self);
 
 C_API void*    VectorGetByIdx(Vector* self, UInt idx);
 C_API NullUInt VectorGetIdxOfFirst(Vector* self, void* data);
@@ -25,16 +28,16 @@ C_API void* VectorRemoveByIdx(Vector* self, UInt idx);
 C_API Bool  VectorRemoveAndFreeByIdx(Vector*, UInt idx);
 
 C_API void VectorEachWithNoParam(Vector* self,
-    VectorNoParamCallback callback);
+    NoParamCallback callback);
 
 C_API void VectorEachWithOneParam(Vector* self,
-    VectorOneParamCallback callback, void* param);
+    OneParamCallback callback, void* param);
 
 C_API void VectorEachWithTwoParams(Vector* self,
-    VectorTwoParamsCallback callback, void* param1, void* param2);
+    TwoParamsCallback callback, void* param1, void* param2);
 
 C_API void VectorEachWithThreeParams(Vector* self,
-    VectorThreeParamsCallback callback, void* param1, void* param2, void* param3);
+    ThreeParamsCallback callback, void* param1, void* param2, void* param3);
 
 #define VectorEach VectorEachWithNoParam
 #define VectorEachWithParam VectorEachWithOneParam

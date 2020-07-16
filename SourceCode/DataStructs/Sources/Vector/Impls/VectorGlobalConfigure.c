@@ -1,12 +1,12 @@
-#include "../VectorConfigure.h"
-
 #include <stdlib.h>
+
+#include "../VectorGlobalConfigure.h"
 
 static UInt InitializationCapacity = 32U;
 static float MemoryGrowthRate = 2.0f;
 
-static VectorMemFreeFunction Free = free;
-static VectorMemMallocFunction Malloc = malloc;
+static MemFreeFunction Free = free;
+static MemMallocFunction Malloc = malloc;
 
 C_API void VectorSetInitializationCapacity(UInt newCapacity) {
     InitializationCapacity = newCapacity > 0 ? newCapacity : InitializationCapacity;
@@ -20,19 +20,19 @@ C_API UInt VectorGetInitializationCapacity(void) {
     return InitializationCapacity;
 }
 
-C_API void VectorSetMemFreeFunc(VectorMemFreeFunction func) {
+C_API void VectorSetMemFreeFunc(MemFreeFunction func) {
     Free = func;
 }
 
-C_API VectorMemFreeFunction VectorGetMemFreeFunc() {
+C_API MemFreeFunction VectorGetMemFreeFunc() {
     return Free;
 }
 
-C_API void VectorSetMemMallocFunc(VectorMemMallocFunction func) {
+C_API void VectorSetMemMallocFunc(MemMallocFunction func) {
     Malloc = func;
 }
 
-C_API VectorMemMallocFunction VectorGetMemMallocFunc() {
+C_API MemMallocFunction VectorGetMemMallocFunc() {
     return Malloc;
 }
 

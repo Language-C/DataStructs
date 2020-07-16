@@ -19,18 +19,29 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\Array.h" />
+    <ClInclude Include="Sources\Array\Array.h" />
+    <ClInclude Include="Sources\Array\ArrayGlobalConfigure.h" />
+    <ClInclude Include="Sources\Array\ArrayStruct.h" />
+    <ClInclude Include="Sources\BasicTypes\Callbacks.h" />
+    <ClInclude Include="Sources\BasicTypes\FunctionTypes.h" />
     <ClInclude Include="Sources\BasicTypes\Micros.h" />
     <ClInclude Include="Sources\BasicTypes\Types.h" />
     <ClInclude Include="Sources\BasicTypes\Bool.h" />
     <ClInclude Include="Sources\BasicTypes\Int.h" />
+    <ClInclude Include="Sources\Vector.h" />
     <ClInclude Include="Sources\Vector\Vector.h" />
-    <ClInclude Include="Sources\Vector\VectorConfigure.h" />
+    <ClInclude Include="Sources\Vector\VectorArgorithm.h" />
+    <ClInclude Include="Sources\Vector\VectorGlobalConfigure.h" />
     <ClInclude Include="Sources\Vector\VectorStruct.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\Array\Impls\Array.c" />
+    <ClCompile Include="Sources\Array\Impls\ArrayGlobalConfigure.c" />
     <ClCompile Include="Sources\BasicTypes\Impls\Int.c" />
     <ClCompile Include="Sources\Vector\Impls\Vector.c" />
-    <ClCompile Include="Sources\Vector\Impls\VectorConfigure.c" />
+    <ClCompile Include="Sources\Vector\Impls\VectorArgorithm.c" />
+    <ClCompile Include="Sources\Vector\Impls\VectorGlobalConfigure.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -105,6 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <OpenMPSupport>false</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -120,6 +132,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <OpenMPSupport>false</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,6 +150,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <OpenMPSupport>false</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,6 +170,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <OpenMPSupport>false</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

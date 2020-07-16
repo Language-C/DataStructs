@@ -52,3 +52,5 @@ Mkfile.old
 dkms.conf
 /SourceCode/.vs
 /SourceCode/x64
+/SourceCode/Tests/DataStructsTest/x64
+/SourceCode/DataStructs/x64

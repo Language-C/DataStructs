@@ -4,3 +4,6 @@
 
 #include "Bool.h"
 #include "Int.h"
+
+#include "Callbacks.h"
+#include "FunctionTypes.h"

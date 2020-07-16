@@ -168,7 +168,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\Array\ArrayTest.cpp" />
     <ClCompile Include="Sources\BasicTypes\IntTest.cpp" />
+    <ClCompile Include="Sources\Vector\VectorArgorithmTest.cpp" />
     <ClCompile Include="Sources\Vector\VectorTest.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
