@@ -102,6 +102,8 @@
       <UseFullPaths>true</UseFullPaths>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -119,6 +121,8 @@
       <UseFullPaths>true</UseFullPaths>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -138,6 +142,8 @@
       <UseFullPaths>true</UseFullPaths>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -159,6 +165,8 @@
       <UseFullPaths>true</UseFullPaths>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -170,6 +178,9 @@
   <ItemGroup>
     <ClCompile Include="Sources\Array\ArrayTest.cpp" />
     <ClCompile Include="Sources\BasicTypes\IntTest.cpp" />
+    <ClCompile Include="Sources\ClassConfigure\ClassConfigure.cpp" />
+    <ClCompile Include="Sources\ClassInstance\ClassInstance.cpp" />
+    <ClCompile Include="Sources\Memory\Memory.cpp" />
     <ClCompile Include="Sources\Vector\VectorArgorithmTest.cpp" />
     <ClCompile Include="Sources\Vector\VectorTest.cpp" />
     <ClCompile Include="pch.cpp">
@@ -181,6 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Sources\ClassConfigure\Point3DConfigure.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DataStructs\DataStructs.vcxproj">

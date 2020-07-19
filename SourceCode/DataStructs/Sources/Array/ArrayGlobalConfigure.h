@@ -5,7 +5,6 @@
 typedef struct ArrayGlobalConfigure {
     MemMallocFunction Malloc;
     MemFreeFunction Free;
-    UInt InitializationCapacity
 } ArrayGlobalConfigure;
 
 C_API ArrayGlobalConfigure* ArrayGetGlobalConfig();

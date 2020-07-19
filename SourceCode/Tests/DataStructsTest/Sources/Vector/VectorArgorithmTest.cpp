@@ -14,7 +14,7 @@ namespace VectorArgorithmTest
         return new int(*(int*)src);
     }
 
-    TEST_CLASS(Dup)
+    /*TEST_CLASS(Dup)
     {
     public:
         TEST_METHOD(Dup_Int) {
@@ -29,5 +29,5 @@ namespace VectorArgorithmTest
             VectorDestroyWithFreeElements(&vector);
             VectorDestroyWithFreeElements(&dup);
         }
-    };
+    };*/
 }

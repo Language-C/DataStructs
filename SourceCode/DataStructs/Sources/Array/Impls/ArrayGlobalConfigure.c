@@ -4,8 +4,7 @@
 
 ArrayGlobalConfigure ArrayGlobalConfig = {
     malloc,
-    free,
-    32U
+    free
 };
 
 C_API ArrayGlobalConfigure* ArrayGetGlobalConfig() {

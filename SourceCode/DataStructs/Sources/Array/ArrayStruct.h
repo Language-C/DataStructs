@@ -1,13 +1,30 @@
 #pragma once
 
-#include "../BasicTypes/Types.h"
+#ifdef WANT_TO_EXTEND_ARRAY
 
-typedef struct ArrayConfigure {
-    UInt BytesOfValueClass;
-} ArrayConfigure;
+#include <Types.h>
+#include <ClassMeta.h>
 
 typedef struct Array {
+    Sizetype Capacity;
+    const ClassMeta* Configure;
     char* Data;
-    ArrayConfigure * Configure;
-    UInt  Capacity;
 } Array;
+
+typedef struct ArrayParams {
+    Sizetype Capacity;
+    const ClassMeta* Configure;
+} ArrayParams;
+
+#ifdef self
+#undef self
+#endif // self
+
+#define self ((Array*)(array))
+
+#ifdef selfPtr
+#undef selfPtr
+#endif // selfPtr
+#define selfPtr ((Array*)(*array))
+
+#endif // WANT_TO_EXTEND_ARRAY

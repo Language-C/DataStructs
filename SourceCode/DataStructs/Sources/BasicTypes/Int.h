@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+
 #include "Micros.h"
 #include "Bool.h"
 
@@ -9,15 +11,18 @@ typedef unsigned char UChar;
 typedef int Int;
 typedef float Float;
 typedef double Double;
-typedef long long Int64;
+typedef int64_t Int64;
+typedef uint64_t UInt64;
 
-typedef struct NullInt_
+typedef size_t Sizetype;
+
+typedef struct NullInt
 {
     Bool Valid;
     Int Value;
 } NullInt;
 
-typedef struct NullUInt_
+typedef struct NullUInt
 {
     Bool Valid;
     UInt Value;
