@@ -45,9 +45,6 @@
     <ClInclude Include="Sources\Array\ArrayStruct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Array\ArrayGlobalConfigure.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\BasicTypes\FunctionTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -75,9 +72,6 @@
     <ClInclude Include="Sources\ClassInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Array\ArrayConfigure.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\ClassOriented\ClassOriented.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -85,6 +79,33 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sources\ClassMeta.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Array\ArrayMeta.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Stack\StackStruct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Stack\StackMeta.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Stack\Stack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Stack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Deque\Deque.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Deque\DequeMeta.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Deque\DequeStruct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Deque.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -104,9 +125,6 @@
     <ClCompile Include="Sources\Vector\Impls\VectorGlobalConfigure.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Array\Impls\ArrayGlobalConfigure.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Memory\Impls\Memory.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -116,10 +134,25 @@
     <ClCompile Include="Sources\ClassInstance\Impls\ClassGlobalConfigure.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Array\Impls\ArrayConfigure.c">
+    <ClCompile Include="Sources\ClassMeta\Impls\ClassMeta.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\ClassMeta\Impls\ClassMeta.c">
+    <ClCompile Include="Sources\Array\Impls\ArrayMeta.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Stack\Impls\StackMeta.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Stack\Impls\Stack.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ClassMeta\Impls\DefaultMeta.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Deque\Impls\Deque.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Deque\Impls\DequeMeta.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

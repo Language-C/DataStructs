@@ -49,6 +49,6 @@ static Destructor(Point3D, self)
 
 static ClassMeta* Point3DConfig()
 {
-    static ClassMeta Ponit3DConfigure = MakeClassMeta(Point3D);
-    return &Ponit3DConfigure;
+    static ClassMeta Ponit3DMeta = MakeClassMeta(Point3D);
+    return &Ponit3DMeta;
 }

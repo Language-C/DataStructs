@@ -21,8 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Sources\Array.h" />
     <ClInclude Include="Sources\Array\Array.h" />
-    <ClInclude Include="Sources\Array\ArrayConfigure.h" />
-    <ClInclude Include="Sources\Array\ArrayGlobalConfigure.h" />
+    <ClInclude Include="Sources\Array\ArrayMeta.h" />
     <ClInclude Include="Sources\Array\ArrayStruct.h" />
     <ClInclude Include="Sources\BasicTypes\Callbacks.h" />
     <ClInclude Include="Sources\BasicTypes\FunctionTypes.h" />
@@ -37,6 +36,14 @@
     <ClInclude Include="Sources\ClassMeta\ClassMeta.h" />
     <ClInclude Include="Sources\ClassOriented\ClassOriented.h" />
     <ClInclude Include="Sources\Memory\Memory.h" />
+    <ClInclude Include="Sources\Deque.h" />
+    <ClInclude Include="Sources\Deque\Deque.h" />
+    <ClInclude Include="Sources\Deque\DequeMeta.h" />
+    <ClInclude Include="Sources\Deque\DequeStruct.h" />
+    <ClInclude Include="Sources\Stack.h" />
+    <ClInclude Include="Sources\Stack\Stack.h" />
+    <ClInclude Include="Sources\Stack\StackMeta.h" />
+    <ClInclude Include="Sources\Stack\StackStruct.h" />
     <ClInclude Include="Sources\Types.h" />
     <ClInclude Include="Sources\Vector.h" />
     <ClInclude Include="Sources\Vector\Vector.h" />
@@ -46,13 +53,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Array\Impls\Array.c" />
-    <ClCompile Include="Sources\Array\Impls\ArrayConfigure.c" />
-    <ClCompile Include="Sources\Array\Impls\ArrayGlobalConfigure.c" />
+    <ClCompile Include="Sources\Array\Impls\ArrayMeta.c" />
     <ClCompile Include="Sources\BasicTypes\Impls\Int.c" />
     <ClCompile Include="Sources\ClassMeta\Impls\ClassMeta.c" />
     <ClCompile Include="Sources\ClassInstance\Impls\ClassGlobalConfigure.c" />
     <ClCompile Include="Sources\ClassInstance\Impls\ClassInstance.c" />
+    <ClCompile Include="Sources\ClassMeta\Impls\DefaultMeta.c" />
     <ClCompile Include="Sources\Memory\Impls\Memory.c" />
+    <ClCompile Include="Sources\Deque\Impls\Deque.c" />
+    <ClCompile Include="Sources\Deque\Impls\DequeMeta.c" />
+    <ClCompile Include="Sources\Stack\Impls\Stack.c" />
+    <ClCompile Include="Sources\Stack\Impls\StackMeta.c" />
     <ClCompile Include="Sources\Vector\Impls\Vector.c" />
     <ClCompile Include="Sources\Vector\Impls\VectorArgorithm.c" />
     <ClCompile Include="Sources\Vector\Impls\VectorGlobalConfigure.c" />

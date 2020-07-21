@@ -7,13 +7,13 @@
 
 typedef struct Array {
     Sizetype Capacity;
-    const ClassMeta* Configure;
+    const ClassMeta* Meta;
     char* Data;
 } Array;
 
 typedef struct ArrayParams {
     Sizetype Capacity;
-    const ClassMeta* Configure;
+    const ClassMeta* Meta;
 } ArrayParams;
 
 #ifdef self

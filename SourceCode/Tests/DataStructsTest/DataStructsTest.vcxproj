@@ -178,9 +178,11 @@
   <ItemGroup>
     <ClCompile Include="Sources\Array\ArrayTest.cpp" />
     <ClCompile Include="Sources\BasicTypes\IntTest.cpp" />
-    <ClCompile Include="Sources\ClassConfigure\ClassConfigure.cpp" />
+    <ClCompile Include="Sources\ClassMeta\ClassMeta.cpp" />
     <ClCompile Include="Sources\ClassInstance\ClassInstance.cpp" />
     <ClCompile Include="Sources\Memory\Memory.cpp" />
+    <ClCompile Include="Sources\Deque\Deque.cpp" />
+    <ClCompile Include="Sources\Stack\Stack.cpp" />
     <ClCompile Include="Sources\Vector\VectorArgorithmTest.cpp" />
     <ClCompile Include="Sources\Vector\VectorTest.cpp" />
     <ClCompile Include="pch.cpp">
@@ -192,7 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Sources\ClassConfigure\Point3DConfigure.h" />
+    <ClInclude Include="Sources\ClassMeta\Point3DMeta.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DataStructs\DataStructs.vcxproj">

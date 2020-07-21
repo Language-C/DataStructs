@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "../ClassConfigure/Point3DConfigure.h"
+#include "../ClassMeta/Point3DMeta.h"
 
 extern "C"
 {
@@ -15,7 +15,8 @@ namespace ArrayTest
 
     TEST_CLASS(Create)
     {
-        Array* array = ArrayCreate(ARRAY_SIZE, Point3DConfig());
+        ClassMeta Ponit3DMeta = MakeClassMeta(Point3D);
+        Array* array = ArrayCreate(ARRAY_SIZE, &Ponit3DMeta);
     public:
         ~Create() {
             ArrayDestroy(&array);
@@ -31,7 +32,7 @@ namespace ArrayTest
         }
 
         TEST_METHOD(CreateWithSize_0) {
-            Array* arr = ArrayCreate(0U, Point3DConfig());
+            Array* arr = ArrayCreate(0U, &Ponit3DMeta);
             Assert::IsNull(arr);
         }
     };
@@ -52,6 +53,24 @@ namespace ArrayTest
 
         TEST_METHOD(FillNull) {
             ArrayFill(array, Null);
+        }
+    };
+
+    TEST_CLASS(IsValid)
+    {
+        Array* array = ArrayCreate(ARRAY_SIZE, Point3DConfig());
+        Point3D Point = Point3D(2, 3, 1);
+    public:
+        ~IsValid() {
+            ArrayDestroy(&array);
+        }
+
+        TEST_METHOD(WhenNull) {
+            Assert::IsFalse(ArrayIsValid(Null));
+        }
+
+        TEST_METHOD(Valid) {
+            Assert::IsTrue(ArrayIsValid(array));
         }
     };
 

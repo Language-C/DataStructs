@@ -2,83 +2,81 @@
 #include "../ClassGlobalConfigure.h"
 
 static void AfterCreateInstances(char* instances, const Sizetype size,
-    const ClassMeta* const config) {
-    char* end = &instances[config->BytesOfValueClass * size];
+    const ClassMeta* const meta) {
+    char* end = &instances[meta->BytesOfValueClass * size];
 
-    if (config->Constructor) {
-        for (; instances < end; instances += config->BytesOfValueClass) {
-            config->Constructor(instances);
-        }
+    for (; instances < end; instances += meta->BytesOfValueClass) {
+        meta->Constructor(instances);
     }
 }
 
 static void BeforeFreeInstances(char* instances, const Sizetype size,
-    const ClassMeta* const config) {
-    char* end = &(instances[config->BytesOfValueClass * size]);
+    const ClassMeta* const meta) {
+    char* end = &(instances[meta->BytesOfValueClass * size]);
 
-    if (config->Destructor) {
-        for (; instances < end; instances += config->BytesOfValueClass) {
-            config->Destructor(instances);
-        }
+    for (; instances < end; instances += meta->BytesOfValueClass) {
+        meta->Destructor(instances);
     }
 }
 
-C_API void* NewInstance(const ClassMeta* const config) {
+C_API void* NewInstance(const ClassMeta* const meta) {
     void* instance = Null;
 
-    if (!config || config->BytesOfValueClass == 0) {
+    if (!meta || meta->BytesOfValueClass == 0) {
         return Null;
     }
 
-    instance = ClassGlobalConfig()->Malloc(config->BytesOfValueClass);
-    if (instance && config->Constructor) {
-        config->Constructor(instance);
+    instance = ClassGlobalConfig()->Malloc(meta->BytesOfValueClass);
+    if (instance && meta->Constructor) {
+        meta->Constructor(instance);
     }
     return instance;
 }
 
-C_API void* NewInstanceWithParams(const ClassMeta* const config, void* const params) {
+C_API void* NewInstanceWithParams(const ClassMeta* const meta, const void* const params) {
     void* instance = Null;
 
-    if (!config || config->BytesOfValueClass == 0) {
+    if (!meta || meta->BytesOfValueClass == 0) {
         return Null;
     }
 
-    instance = ClassGlobalConfig()->Malloc(config->BytesOfValueClass);
-    if (instance && config->ParamConstructor) {
-        config->ParamConstructor(instance, params);
+    instance = ClassGlobalConfig()->Malloc(meta->BytesOfValueClass);
+    if (instance && meta->ParamConstructor) {
+        meta->ParamConstructor(instance, params);
     }
     return instance;
 }
 
-C_API void* NewInstances(const Sizetype size, const ClassMeta* const config) {
+C_API void* NewInstances(const Sizetype size, const ClassMeta* const meta) {
     char* instances = Null;
 
-    if (size == 0 || !config || config->BytesOfValueClass == 0) {
+    if (size == 0 || !meta || meta->BytesOfValueClass == 0) {
         return Null;
     }
 
-    instances = (char*)ClassGlobalConfig()->Malloc(config->BytesOfValueClass * size);
-    if (instances) {
-        AfterCreateInstances(instances, size, config);
+    instances = (char*)ClassGlobalConfig()->Malloc(meta->BytesOfValueClass * size);
+    if (instances && meta && meta->Constructor) {
+        AfterCreateInstances(instances, size, meta);
     }
 
     return instances;
 }
 
-C_API void FreeInstance(void* const instance, const ClassMeta* const config) {
+C_API void FreeInstance(void* const instance, const ClassMeta* const meta) {
     if (instance) {
-        if (config && config->Destructor) {
-            config->Destructor(instance);
+        if (meta && meta->Destructor) {
+            meta->Destructor(instance);
         }
         ClassGlobalConfig()->Free(instance);
     }
 }
 
 C_API void FreeInstances(void* const instances, const Sizetype size,
-    const ClassMeta* const config) {
+    const ClassMeta* const meta) {
     if (instances && size > 0) {
-        BeforeFreeInstances((char*)instances, size, config);
+        if (meta && meta->Destructor) {
+            BeforeFreeInstances((char*)instances, size, meta);
+        }
         ClassGlobalConfig()->Free(instances);
     }
 }

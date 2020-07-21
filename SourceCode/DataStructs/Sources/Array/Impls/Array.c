@@ -1,24 +1,25 @@
 #include <ClassInstance.h>
 
 #include "../Array.h"
-#include "../ArrayConfigure.h"
-#include "../ArrayGlobalConfigure.h"
 
 #define WANT_TO_EXTEND_ARRAY
 #include "../ArrayStruct.h"
 
-C_API void* ArrayCreate(Sizetype const capacity,
-    const ClassMeta* const configure) {
-    void* array = Null;
-    ArrayParams params = { capacity, configure };
+static Bool ArrayParamsIsValid(const ArrayParams* const params) {
+    return params && params->Meta && params->Capacity > 0 ? True : False;
+}
 
-    if (capacity < 1 || !ClassMetaIsValid(configure)) {
+C_API void* ArrayCreate(const Sizetype capacity, const ClassMeta* const meta) {
+    void* array = Null;
+    ArrayParams params = { capacity, meta };
+
+    if (!ArrayParamsIsValid(&params)) {
         return Null;
     }
 
-    self = NewInstanceWithParams(ArrayConfig(), &params);
+    self = NewInstanceWithParams(ArrayMeta(), &params);
     if (!ArrayIsValid(self)) {
-        FreeInstance(self, ArrayConfig());
+        FreeInstance(self, ArrayMeta());
         self = Null;
     }
     return self;
@@ -26,12 +27,12 @@ C_API void* ArrayCreate(Sizetype const capacity,
 
 C_API void ArrayFill(void* const array, const void* const data) {
     char* begin;
-    const char* end = &(self->Data[self->Capacity * self->Configure->BytesOfValueClass]);
+    const char* end = &(self->Data[self->Capacity * self->Meta->BytesOfValueClass]);
 
     for (begin = self->Data;
         begin < end;
-        begin += self->Configure->BytesOfValueClass) {
-        self->Configure->CopyConstruct(begin, data);
+        begin += self->Meta->BytesOfValueClass) {
+        self->Meta->CopyConstruct(begin, data);
     }
 }
 
@@ -39,30 +40,28 @@ C_API void ArrayDestroy(void** const array) {
     if (!array || !selfPtr) {
         return;
     }
-
-    ArrayGetGlobalConfig()->Free(selfPtr->Data);
-    ArrayGetGlobalConfig()->Free(selfPtr);
+    FreeInstance(selfPtr, ArrayMeta());
     selfPtr = Null;
 }
 
 C_API Bool ArrayIsValid(const void* const array) {
-    return self && self->Configure && self->Data &&
+    return self && self->Meta && self->Data &&
         (self->Capacity > 0) ? True : False;
 }
 
-C_API void* ArrayGet(const void* const array, const Sizetype idx) {
+C_API void* ArrayGet(void* const array, const Sizetype idx) {
     if (idx + 1 > self->Capacity) {
         return Null;
     }
 
-    return &(self->Data[idx * self->Configure->BytesOfValueClass]);
+    return &(self->Data[idx * self->Meta->BytesOfValueClass]);
 }
 
-C_API Bool ArraySet(const void* const array,
-    const Sizetype idx, const void* const data) {
+C_API Bool ArraySet(void* const array,
+    const Sizetype idx, void* const data) {
     if (idx + 1 > self->Capacity) {
         return False;
     }
-    self->Configure->CopyConstruct(&self->Data[idx * self->Configure->BytesOfValueClass], data);
+    self->Meta->CopyConstruct(&self->Data[idx * self->Meta->BytesOfValueClass], data);
     return True;
 }

@@ -22,3 +22,13 @@ C_API Bool ClassMetaIsValid(const ClassMeta* const config);
     clazz##CopyConstructor, \
     clazz##Destructor\
 }
+
+#define MakeNullMeta(clazz) {\
+    sizeof(clazz),\
+    Null,\
+    Null,\
+    Null,\
+    Null\
+}
+
+C_API ClassMeta* VoidMeta();

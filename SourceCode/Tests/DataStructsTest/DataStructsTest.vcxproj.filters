@@ -33,10 +33,16 @@
     <ClCompile Include="Sources\Memory\Memory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\ClassConfigure\ClassConfigure.cpp">
+    <ClCompile Include="Sources\ClassInstance\ClassInstance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\ClassInstance\ClassInstance.cpp">
+    <ClCompile Include="Sources\ClassMeta\ClassMeta.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Stack\Stack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Deque\Deque.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,7 +50,7 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\ClassConfigure\Point3DConfigure.h">
+    <ClInclude Include="Sources\ClassMeta\Point3DMeta.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

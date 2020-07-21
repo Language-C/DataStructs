@@ -2,4 +2,4 @@
 
 #include <ClassMeta.h>
 
-C_API const ClassMeta* ArrayConfig();
+C_API const ClassMeta* ArrayMeta();

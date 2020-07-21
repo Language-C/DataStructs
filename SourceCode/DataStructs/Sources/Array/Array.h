@@ -2,7 +2,10 @@
 
 #include <ClassMeta.h>
 
-C_API void* ArrayCreate(Sizetype const capacity, const ClassMeta* const configure);
+#include "ArrayMeta.h"
+
+C_API void* ArrayCreate(const Sizetype capacity,
+    const ClassMeta* const meta);
 
 C_API void ArrayDestroy(void** const array);
 
@@ -10,6 +13,5 @@ C_API void ArrayFill(void* const array, const void* const data);
 
 C_API Bool ArrayIsValid(const void* const array);
 
-C_API void* ArrayGet(const void* const array, const Sizetype idx);
-C_API Bool ArraySet(const void* const array,
-    const Sizetype idx, const void* const data);
+C_API void* ArrayGet(void* const array, const Sizetype idx);
+C_API Bool ArraySet(void* const array, const Sizetype idx, void* const data);
